@@ -1,0 +1,2 @@
+module FichaTecnicaHelper
+end

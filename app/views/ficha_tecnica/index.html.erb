@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario con banner y pie de página</title>
+  <link rel="stylesheet" type="text/css" href="C:/Users/antom/Documents/GitHub/FormMydec/app/assets/stylesheets/ficha_tecnica.css">
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const selectMenu = document.querySelector('select#ficha_tecnica_presentante');
+    const preguntasFisica = document.querySelectorAll('.opcion-fisica');
+    const preguntasJuridica = document.querySelectorAll('.opcion-juridica');
+
+    ocultarPreguntasAdicionales();
+
+    selectMenu.addEventListener('change', function() {
+      ocultarPreguntasAdicionales();
+
+      const selectedOption = selectMenu.value;
+      if (selectedOption === 'Persona Fisica') {
+        preguntasFisica.forEach(element => {
+          element.style.display = 'block';
+        });
+      } else if (selectedOption === 'Persona Juridica') {
+        preguntasJuridica.forEach(element => {
+          element.style.display = 'block';
+        });
+      }
+    });
+
+    function ocultarPreguntasAdicionales() {
+      preguntasFisica.forEach(element => {
+        element.style.display = 'none';
+      });
+      preguntasJuridica.forEach(element => {
+        element.style.display = 'none';
+      });
+    }
+  });
+</script>
+
+
+</head>
+<body>
+
+<div class="container">
+  <div class="banner-brand">
+    <a href="https://www.gba.gob.ar/">
+      <img src="https://gba.gob.ar/imagenes/logo_gba_footer_blanco.svg" alt="logo buenos aires provincia">
+    </a>
+  </div>
+</div>
+
+<div class="formulario">
+  <h1>CONCURSO MYDEC</h1>
+  <h2>CONCURSO DE CORTOMETRAJES "MUJERES Y DIVERSIDADES EN CONSTRUCCIÓN"</h2>
+
+  <%= form_with(model: @ficha_tecnica, url: ficha_tecnica_path, local: true, method: :post, multipart: true) do |ficha_tecnica_form| %>
+
+    <h5 class="titilos">Ficha General</h5>
+    <div>
+      
+      <%= ficha_tecnica_form.label :categoria_id, "Categoría: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.select :categoria_id, options_for_select(['Cortometraje', 'Ficción', 'Animación']), prompt: "Seleccionar categoría" %>
+      
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :titulo, "Título de la obra: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :titulo %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :link, "Link de la obra : (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :link %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :password, "Contraseña: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :password %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :sinopsis, "Breve sinopsis (máximo 3000 caracteres): (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :sinopsis, rows: 5 %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :afiche, "Afiche de la obra:" %>
+      <%= ficha_tecnica_form.file_field :afiche %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :imagen1, "Tres (3) imágenes de la obra: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.file_field :imagen1, multiple:true %>
+    </div>
+    <h5 class="titilos">Ficha Técnica</h5>
+    <div>
+      <%= ficha_tecnica_form.label :pais, "País: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :pais %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :year, "Año: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :year %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :duracion, "Duración en minutos: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :duracion %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :elenco, "Elenco: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_area :elenco, rows: 5 %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :etecnicoc, "Equipo técnico completo: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_area :etecnicoc, rows: 5 %>
+    </div>
+    <h5 class="titilos">Motivaciones</h5>
+    <div>
+      <%= ficha_tecnica_form.label :motivacion_direccion, "Motivación Dirección (máximo 3000 caracteres): (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_area :motivacion_direccion, rows: 5 %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :motivacion_produccion, "Motivación Producción (máximo 3000 caracteres): (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_area :motivacion_produccion, rows: 5 %>
+    </div>
+    <h5 class="titilos">Datos de la persona presentante</h5>
+     <div>
+      <%= ficha_tecnica_form.label :rol, "Rol en la obra: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.select :rol, options_for_select(['Dirección', 'Producción', 'Dirección y Producción']), prompt: "Seleccionar rol" %>
+    </div> 
+    <div>
+      <%= ficha_tecnica_form.label :nomapell, "Nombre y Apellido: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :nomapell %>
+    </div> 
+    <div>
+      <%= ficha_tecnica_form.label :cuit, "CUIT: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :cuit %>
+    </div> 
+    <h5 class="titilos">Domicilio declarado</h5>
+    <div>
+      <%= ficha_tecnica_form.label :calle, "Calle: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :calle %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :num, "Numero: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :num %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :piso, "Piso:" %>
+      <%= ficha_tecnica_form.text_field :piso %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :departamento, "Departamento:" %>
+      <%= ficha_tecnica_form.text_field :departamento %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :localidad, "Municipio: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.select :localidad, options_for_select(['Adolfo Alsina', 'Adolfo González Chaves', 'Alberti', 'Almirante Brown', 'Arrecifes', 'Avellaneda', 'Ayacucho', 'Azul', 'Bahía Blanca', 'Balcarce', 'Baradero', 'Benito Juárez', 'Berazategui', 'Berisso', 'Bolívar', 'Bragado', 'Brandsen', 'Campana', 'Capitán Sarmiento', 'Carlos Casares', 'Carlos Tejedor', 'Carmen de Areco', 'Carmen de Patagones', 'Castelli', 'Cañuelas', 'Chcabuco', 'Chascomús', 'Chivilcoy', 'Colón', 'Coronel Dorrego', 'Coronel Pringles', 'Coronel Rosales', 'Coronel Suárez', 'Daireaux', 'Dolores', 'Ensenada', 'Escobar', 'Esteban Echeverría', 'Exaltación de la Cruz', 'Ezeiza', 'Florencio Varela', 'Florentino Ameghino', 'General Alvarado', 'General Alvear', 'General Arenales', 'General Belgrano', 'General Guido', 'General La Madrid', 'General Las Heras', 'General Lavalle', 'General Madariaga', 'General Paz', 'General Pinto', 'General Pueyrredón', 'General Rodríguez', 'General San Martín', 'General Viamonte', 'General Villegas', 'Guaminí', 'Hipólito Yrigoyen', 'Hurlingham', 'Ituzaingó', 'José C. Paz', 'Junín', 'La Costa', 'La Matanza', 'La Plata', 'Lanús', 'Laprida', 'Las Flores', 'Leandro N. Alem', 'Lezama', 'Lincoln', 'Lobería', 'Lobos', 'Lomas de Zamora', 'Luján', 'Magdalena', 'Maipú', 'Malvinas Argentinas', 'Mar Chiquita', 'Marcos Paz', 'Mercedes', 'Merlo', 'Monte Hermoso', 'Moreno', 'Morón', 'Navarro', 'Necochea', 'Nueve de Julio', 'Olavarría', 'Pehuajó', 'Pellegrini', 'Pergamino', 'Pila', 'Pilar', 'Pinamar', 'Presidente Perón', 'Puan', 'Punta Indio', 'Quilmes', 'Ramallo', 'Rauch', 'Rivadavia', 'Rojas', 'Roque Pérez', 'Saavedra', 'Saladillo', 'Salliqueló', 'Salto', 'San Andrés de Giles', 'San Antonio de Areco', 'San Cayetano', 'San Fernando', 'San Isidro', 'San Miguel', 'San Miguel del Monte', 'San Nicolás', 'San Pedro', 'San Vicente', 'Suipacha', 'Tandil', 'Tapalqué', 'Tigre', 'Tordillo', 'Tornquist', 'Trenque Lauquen', 'Tres Arroyos', 'Tres de Febrero', 'Tres Lomas', 'Veinticinco de Mayo', 'Vicente López', 'Villa Gesell', 'Villarino', 'Zárate' ]), prompt: "Localidad" %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :provincia, "Provincia: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :provincia %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :codpostal, "Codigo Postal: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :codpostal %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :mail, "Correo electrónico: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :mail %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :telcontacto, "Teléfono de contacto: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.text_field :telcontacto %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :web, "Web / Redes:" %>
+      <%= ficha_tecnica_form.text_field :web %>
+    </div>
+    <h5 class="titilos">Documentacion de la persona presentante</h5>
+    <div>
+      <%= ficha_tecnica_form.label :presentante, "Tipo de persona: (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.select :presentante, options_for_select(['Persona Fisica', 'Persona Juridica']), prompt: "Tipo de persona"%>
+    </div>
+    <div class="opcion-fisica">
+      <%= ficha_tecnica_form.label :imgdnif, "Foto de anverso y reverso del DNI (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.file_field :imgdnif, multiple: true %>
+    </div>
+    <div class="opcion-fisica">
+      <%= ficha_tecnica_form.label :documentacion, "Documentación que acredite residencia en la Provincia de Buenos Aires(*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.select :documentacion, options_for_select(['Foto de anverso y reverso del DNI', 'Constitución de domicilio en la Provincia de Buenos Aires', 'Constancia de contrato a su nombre', 'Servicio de agua, gas o luz a su nombre']), prompt: "Seleccione una opción" %>
+    </div>
+    <div class="opcion-fisica">
+      <%= ficha_tecnica_form.label :fdnirepre, "Subir documentación como adjunto:" %>
+      <%= ficha_tecnica_form.file_field :fdnirepre, multiple:true %>
+    </div>
+    <div class="opcion-fisica">
+      <%= ficha_tecnica_form.label :afip, "Situación actualizada ante la AFIP. Constancia de CUIT en caso de corresponder:(*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.file_field :afip %>
+    </div>
+    <div class="opcion-fisica">
+      <%= ficha_tecnica_form.label :alimentaria, "Certificado de libre deuda alimentaria:(*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.file_field :alimentaria %>
+    </div>   
+    <div class="opcion-juridica">
+      <%= ficha_tecnica_form.label :contratosocial, "Estatuto o Contrato Social, con sus modificaciones..." %>
+      <%= ficha_tecnica_form.file_field :contratosocial %>
+    </div>
+    <div class="opcion-juridica">
+      <%= ficha_tecnica_form.label :designacion, "Último acta de designación de autoridades disponible, extraídas del libro de actas debidamente rubricado de donde surja el carácter de representante legal del firmante. En caso que el firmante actúe en calidad de apoderado, deberá agregar también copia del poder respectivo. (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.file_field :designacion %>
+    </div>
+    <div class="opcion-juridica">
+      <%= ficha_tecnica_form.label :imgdnif, "Copia del anverso y reverso del DNI del/la  representante legal y/o apoderado/a de la entidad. (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.file_field :imgdnif, multiple:true %>
+    </div>
+    <div class="opcion-juridica">
+      <%= ficha_tecnica_form.label :breve, "Breve reseña de la trayectoria de la persona jurídica (máximo 3 hojas). (*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.file_field :breve%>
+    </div>
+    <div class="opcion-juridica">
+      <%= ficha_tecnica_form.label :documentacion, "Documentación que acredite residencia en la Provincia de Buenos Aires(*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.select :documentacion, options_for_select(['Foto de anverso y reverso del DNI', 'Constitución de domicilio en la Provincia de Buenos Aires', 'Constancia de contrato a su nombre', 'Servicio de agua, gas o luz a su nombre']), prompt: "Seleccione una opción" %>
+    </div>
+    <div class="opcion-juridica">
+      <%= ficha_tecnica_form.label :fdnirepre, "Subir documentación como adjunto:" %>
+      <%= ficha_tecnica_form.file_field :fdnirepre, multiple:true %>
+    </div>
+    <div class="opcion-juridica">
+      <%= ficha_tecnica_form.label :constancia, "Constancia de Inscripción ante la Administración Federal de Ingresos Públicos (AFIP).(*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.file_field :constancia %>
+    </div>
+    <div class="opcion-juridica">
+      <%= ficha_tecnica_form.label :alimentaria, "Certificado de libre deuda alimentaria:(*Campo obligatorio)" %>
+      <%= ficha_tecnica_form.file_field :alimentaria %>
+    </div>
+    <div class="opcion-juridica">
+      <%= ficha_tecnica_form.label :acreditacion, "Acreditacion de domicilio en la Provincia de Buenos Aires del equipo técnico (en caso de corresponder):" %>
+      <%= ficha_tecnica_form.file_field :acreditacion %>
+    </div>
+
+    <%= ficha_tecnica_form.submit "Enviar" %>
+  <% end %>
+</div>
+
+<div class="notice-container">
+  <% if notice %>
+    <p><%= notice %></p>
+  <% end %>
+</div>
+
+<div class="footer-brand">
+  <img class="logo_footer_provincia" src="https://www.gba.gob.ar/imagenes/social/provincia_icon_Footer.png" alt="ingresar a Buenos Aires Provincia">
+</div>
+
+</body>
+</html>
