@@ -15,15 +15,15 @@ class FichaTecnica < ApplicationRecord
     validates :titulo, presence: true
     validates :link, presence: true
     validates :password, presence: true
-    validates :sinopsis, presence: true
+    validates :sinopsis, presence: true, length: { minimum: 5, maximum: 3000} 
     validates :imagen1, presence: true
     validates :pais, presence: true
     validates :year, presence: true
     validates :duracion, presence: true
     validates :elenco, presence: true
     validates :etecnicoc, presence: true
-    validates :motivacion_direccion, presence: true
-    validates :motivacion_produccion, presence: true
+    validates :motivacion_direccion, presence: true, length: { minimum: 5, maximum: 3000}
+    validates :motivacion_produccion, presence: true, length: { minimum: 5, maximum: 3000}
     validates :rol, presence: true
     validates :nomapell, presence: true
     validates :calle, presence: true
@@ -47,4 +47,6 @@ class FichaTecnica < ApplicationRecord
     has_many_attached :imagen1
     has_many_attached :imgdnif
     has_many_attached :fdnirepre
+    has_many_attached :acreditacion
+    has_many_attached :complementaria
 end

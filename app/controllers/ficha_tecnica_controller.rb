@@ -6,10 +6,10 @@ class FichaTecnicaController < ApplicationController
       def create
         @ficha_tecnica = FichaTecnica.new(ficha_tecnica_params)
         if @ficha_tecnica.save
-          flash[:notice] = "La ficha técnica se ha creado exitosamente."
+          flash[:notice] = "Gracias por su inscripción."
           redirect_to ficha_tecnicas_path
         else
-          puts "Error al guardar la ficha técnica"
+          puts "Hubo un problema al enviar el formulario."
           puts @ficha_tecnica.errors.full_messages.inspect
           render :index
         end

@@ -27,6 +27,7 @@ class AddCamposToFichaTecnica < ActiveRecord::Migration[7.0]
     add_column :ficha_tecnica, :partido, :string
     add_column :ficha_tecnica, :provincia, :string
     add_column :ficha_tecnica, :codpostal, :string
+    add_column :ficha_tecnica, :obser, :string
     add_column :ficha_tecnica, :mail, :string
     add_column :ficha_tecnica, :telcontacto, :string
     add_column :ficha_tecnica, :web, :string
@@ -43,5 +44,6 @@ class AddCamposToFichaTecnica < ActiveRecord::Migration[7.0]
     add_column :ficha_tecnica, :breve, :string
     add_column :ficha_tecnica, :constancia, :string
     add_column :ficha_tecnica, :acreditacion, :string
+    add_column :ficha_tecnica, :complementaria
   end
 end
