@@ -4,11 +4,8 @@ body {
   font-family: Encode Sans, Roboto;
 }
 
-.container {
-  margin-top: 20px;
-}
-
 .formulario {
+  margin-top: 20px;
   max-width: 80%;
   height: 100%;
   padding: 20px;
@@ -79,18 +76,6 @@ body {
   max-width: 100px;
 }
 
-.banner-brand {
-  padding: 10px;
-  text-align: center;
-  top: 10px;
-  left: 10px;
-  z-index: 9999;
-}
-
-.banner-brand img {
-  width: 200px;
-}
-
 .titilos {
   background-color: #cae7ea;
   color: #333;
@@ -112,6 +97,7 @@ body {
 }
 
 .formulario h6 {
+  margin-top: 20px;
   text-align: center;
   font-size: 16px;
   margin-bottom: 20px;

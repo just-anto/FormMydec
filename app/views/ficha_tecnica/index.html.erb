@@ -16,11 +16,11 @@
       ocultarPreguntasAdicionales();
 
       const selectedOption = selectMenu.value;
-      if (selectedOption === 'Persona Fisica') {
+      if (selectedOption === 'Persona Física') {
         preguntasFisica.forEach(element => {
           element.style.display = 'block';
         });
-      } else if (selectedOption === 'Persona Juridica') {
+      } else if (selectedOption === 'Persona Jurídica') {
         preguntasJuridica.forEach(element => {
           element.style.display = 'block';
         });
@@ -36,19 +36,42 @@
       });
     }
   });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const selectMenu = document.querySelector('select#ficha_tecnica_conformacion2');
+    const preguntaSi = document.querySelectorAll('.opcion-si');
+    const preguntaNo = document.querySelectorAll('.opcion-no');
+
+    ocultarPreguntaAdicionales();
+
+    selectMenu.addEventListener('change', function() {
+      ocultarPreguntaAdicionales();
+
+      const selectedOption = selectMenu.value;
+      if (selectedOption === 'Si') {
+        preguntaSi.forEach(element => {
+          element.style.display = 'block';
+        });
+      } else if (selectedOption === 'No') {
+        preguntaNo.forEach(element => {
+          element.style.display = 'block';
+        });
+      }
+    });
+
+    function ocultarPreguntaAdicionales() {
+      preguntaSi.forEach(element => {
+        element.style.display = 'none';
+      });
+      preguntaNo.forEach(element => {
+        element.style.display = 'none';
+      });
+    }
+  });
+
 </script>
-
-
 </head>
 <body>
-
-<div class="container">
-  <div class="banner-brand">
-    <a href="https://www.gba.gob.ar/">
-      <img src="https://gba.gob.ar/imagenes/logo_gba_footer_blanco.svg" alt="logo buenos aires provincia">
-    </a>
-  </div>
-</div>
 
 <div class="formulario">
   <h1>CONCURSO MYDEC</h1>
@@ -186,7 +209,7 @@
     <h5 class="titilos">Documentación de la persona presentante</h5>
     <div>
       <%= ficha_tecnica_form.label :presentante, "Tipo de persona (*)" %>
-      <%= ficha_tecnica_form.select :presentante, options_for_select(['Persona Fisica', 'Persona Juridica']), prompt: "Tipo de persona"%>
+      <%= ficha_tecnica_form.select :presentante, options_for_select(['Persona Física', 'Persona Jurídica']), prompt: "Tipo de persona"%>
     </div>
     <div class="opcion-fisica">
       <%= ficha_tecnica_form.label :imgdnif, "Foto de anverso y reverso del DNI (*)" %>
@@ -240,13 +263,21 @@
       <%= ficha_tecnica_form.label :alimentaria, "Certificado de libre deuda alimentaria (*)" %>
       <%= ficha_tecnica_form.file_field :alimentaria %>
     </div>
-    <h5 class="titilos">Documentación complementarios</h5>
+    <h5 class="titilos">Información complementaria</h5>
     <div>
-      <%= ficha_tecnica_form.label :acreditacion, "Acreditación de domicilio en la Provincia de Buenos Aires del equipo técnico (en caso de corresponder)" %>
-      <%= ficha_tecnica_form.file_field :acreditacion, multiple:true %>
+      <%= ficha_tecnica_form.label :conformacion, "¿Su equipo está conformado por el 50% o más personas que sean mujeres y diversidades? (*)" %>
+      <%= ficha_tecnica_form.select :conformacion, options_for_select(['Si', 'No']), prompt: "Conformación del equipo"%>
     </div>
     <div>
-      <%= ficha_tecnica_form.label :complementaria, "Archivos complementaria" %>
+      <%= ficha_tecnica_form.label :conformacion2, "¿Su equipo está conformado por el 50% o más personas de la Provincia de Buenos Aires? (*)" %>
+      <%= ficha_tecnica_form.select :conformacion2, options_for_select(['Si', 'No']), prompt: "Conformación del equipo", data: { target: "preguntasSip", showIfValue: "Si" } %>
+    </div>
+    <div class="opcion-si">
+      <%= ficha_tecnica_form.label :acreditacion, "Acreditación de domicilio en la Provincia de Buenos Aires del equipo técnico (*)" %>
+      <%= ficha_tecnica_form.file_field :acreditacion, multiple: true %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :complementaria, "Archivos complementarios" %>
       <%= ficha_tecnica_form.file_field :complementaria, multiple:true %>
     </div>
 
@@ -264,10 +295,6 @@
   <% if notice %>
     <p><%= notice %></p>
   <% end %>
-</div>
-
-<div class="footer-brand">
-  <img class="logo_footer_provincia" src="https://www.gba.gob.ar/imagenes/social/provincia_icon_Footer.png" alt="ingresar a Buenos Aires Provincia">
 </div>
 
 </body>

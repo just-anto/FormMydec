@@ -18,6 +18,6 @@ class FichaTecnicaController < ApplicationController
       private
     
       def ficha_tecnica_params
-        params.require(:ficha_tecnica).permit(:categoria_id, :titulo, :link, :password, :sinopsis, :afiche, :imagen1 [ ], :pais, :year, :duracion, :elenco, :etecnicoc, :motivacion_direccion, :motivacion_produccion, :rol, :nomapell, :cuil,:calle, :num, :piso, :departamento, :localidad, :provincia, :codpostal, :mail, :telcontacto, :web, :presentante, :documentacion, :fdnirepre [ ], :afip, :alimentaria, :contratosocial, :designacion, :imgdnif [ ], :breve, :constancia, :acreditacion)
+        params.require(:ficha_tecnica).permit(:categoria_id, :titulo, :link, :password, :sinopsis, :afiche, :imagen1 [ ], :pais, :year, :duracion, :elenco, :etecnicoc, :motivacion_direccion, :motivacion_produccion, :rol, :nomapell, :cuil,:calle, :num, :piso, :departamento, :localidad, :provincia, :codpostal, :mail, :telcontacto, :web, :presentante, :documentacion, :fdnirepre [ ], :afip, :alimentaria, :contratosocial, :designacion, :imgdnif [ ], :breve, :constancia, :acreditacion, :conformacion, :conformacion2)
       end
 end
